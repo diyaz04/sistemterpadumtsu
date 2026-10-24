@@ -45,7 +45,7 @@ export default function Loading() {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 flex items-center justify-center">
+              <div className="hidden lg:flex lg:col-span-5 items-center justify-center">
                 <div className="w-72 sm:w-80 h-72 sm:h-80 rounded-3xl bg-emerald-100/50 dark:bg-emerald-900/30 border border-emerald-200/60 dark:border-emerald-800/40 flex items-center justify-center">
                   <div className="w-24 h-24 rounded-full bg-emerald-200/70 dark:bg-emerald-800/50" />
                 </div>

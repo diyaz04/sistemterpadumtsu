@@ -175,8 +175,8 @@ export function Hero({ settings }: HeroProps) {
             </div>
           </div>
 
-          {/* ==================== KOLOM KANAN ==================== */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
+          {/* ==================== KOLOM KANAN (Hanya Tampil di Desktop/Layar Lebar) ==================== */}
+          <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
             {/* Ambient Backlight Glow */}
             <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-emerald-400/20 via-[#16A34A]/15 to-[#C9A24B]/15 blur-3xl pointer-events-none" />
 
