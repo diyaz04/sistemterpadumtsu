@@ -1,69 +1,129 @@
-import Image from "next/image";
+import { getSiteSettings, getServices } from "@/lib/supabase/data";
+import { Navbar, Footer } from "@/components/layout";
+import { Hero, ServiceGrid } from "@/components/home";
+import { SearchProvider } from "@/context/search-context";
+import { MapPin, Mail, Clock, Award, Shield } from "lucide-react";
 
-export default function Home() {
+// Revalidate data setiap 60 detik (ISR)
+export const revalidate = 60;
+
+export default async function Home() {
+  const [settings, services] = await Promise.all([
+    getSiteSettings(),
+    getServices(),
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <SearchProvider>
+      <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
+        {/* Decorative Top Gold Line */}
+        <div className="gold-line" />
+
+        {/* Sticky Navbar */}
+        <Navbar settings={settings} services={services} />
+
+        <main className="flex-1">
+          {/* Section Hero */}
+          <Hero settings={settings} />
+
+          {/* Section Jelajahi Layanan Digital */}
+          <ServiceGrid services={services} />
+
+          {/* Section Tentang Portal */}
+          <section
+            id="tentang"
+            className="py-16 sm:py-20 bg-background border-t border-emerald-100/70 dark:border-emerald-950/70 relative scroll-mt-20"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="card-madrasah p-6 flex flex-col items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-[#0F5C3A] dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50 flex items-center justify-center mb-4">
+                    <Shield className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    Keamanan & Privasi
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    Setiap tautan dan platform dikelola secara tersentralisasi dengan
+                    standar keamanan data santri dan warga madrasah.
+                  </p>
+                </div>
+
+                <div className="card-madrasah p-6 flex flex-col items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 text-[#C9A24B] border border-amber-200 dark:border-amber-900/50 flex items-center justify-center mb-4">
+                    <Award className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    Standar Mutu Unggul
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    Mendukung visi MTs KH A. Wahab Muhsin dalam mencetak generasi
+                    berprestasi, berakhlak mulia, dan berwawasan teknologi.
+                  </p>
+                </div>
+
+                <div className="card-madrasah p-6 flex flex-col items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 border border-teal-100 dark:border-teal-900/50 flex items-center justify-center mb-4">
+                    <Clock className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">
+                    Akses Cepat 24 Jam
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    Kemudahan akses bagi santri, wali santri, guru, dan tenaga
+                    kependidikan kapan pun dan di mana pun.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Section Kontak Madrasah */}
+          <section
+            id="kontak"
+            className="py-12 bg-emerald-50/50 dark:bg-[#071911]/50 border-t border-emerald-100/60 dark:border-emerald-950/60 scroll-mt-20"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#C9A24B]">
+                    PUSAT BANTUAN & INFORMASI
+                  </span>
+                  <h3 className="text-xl font-bold text-foreground mt-1">
+                    Hubungi MTs KH A. Wahab Muhsin
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+                    Butuh bantuan mengenai akun atau tautan layanan madrasah? Tim
+                    administrasi kami siap membantu.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="mailto:info@mtswahabmuhsin.sch.id"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-[#0D2218] border border-emerald-200 dark:border-emerald-900/70 text-xs font-semibold text-foreground hover:bg-emerald-50 dark:hover:bg-emerald-950/50 shadow-xs transition-colors"
+                  >
+                    <Mail className="w-4 h-4 text-[#16A34A]" />
+                    info@mtswahabmuhsin.sch.id
+                  </a>
+                  <a
+                    href="https://mtswahabmuhsin.sch.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-[#0D2218] border border-emerald-200 dark:border-emerald-900/70 text-xs font-semibold text-foreground hover:bg-emerald-50 dark:hover:bg-emerald-950/50 shadow-xs transition-colors"
+                  >
+                    <MapPin className="w-4 h-4 text-[#C9A24B]" />
+                    mtswahabmuhsin.sch.id
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <Footer settings={settings} />
+      </div>
+    </SearchProvider>
   );
 }

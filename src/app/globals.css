@@ -1,26 +1,207 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-madrasah-primary: #0F5C3A;
+  --color-madrasah-accent: #16A34A;
+  --color-madrasah-gold: #C9A24B;
+  --color-madrasah-section: #F8FAF9;
+  --color-madrasah-dark: #081710;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", sans-serif;
+  --radius-2xl: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Design system: MTs KH A. Wahab Muhsin */
+  --background: #FFFFFF;
+  --foreground: #102A1E;
+
+  --card: #FFFFFF;
+  --card-foreground: #102A1E;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #102A1E;
+
+  /* Primary Dark Green */
+  --primary: #0F5C3A;
+  --primary-foreground: #FFFFFF;
+
+  /* Accent Bright Green */
+  --accent: #16A34A;
+  --accent-foreground: #FFFFFF;
+
+  /* Very Light Gray/Mint Section Background */
+  --secondary: #F8FAF9;
+  --secondary-foreground: #0F5C3A;
+
+  --muted: #F8FAF9;
+  --muted-foreground: #526E60;
+
+  /* Decorative Gold */
+  --gold: #C9A24B;
+  --gold-foreground: #FFFFFF;
+
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E3ECE7;
+  --input: #E3ECE7;
+  --ring: #16A34A;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #081710;
+  --foreground: #EDF6F1;
+
+  --card: #0D2218;
+  --card-foreground: #EDF6F1;
+
+  --popover: #0D2218;
+  --popover-foreground: #EDF6F1;
+
+  --primary: #16A34A;
+  --primary-foreground: #FFFFFF;
+
+  --accent: #0F5C3A;
+  --accent-foreground: #FFFFFF;
+
+  --secondary: #122C20;
+  --secondary-foreground: #D3E7DD;
+
+  --muted: #122C20;
+  --muted-foreground: #8FAFA1;
+
+  --gold: #D8B25C;
+  --gold-foreground: #081710;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #1C3E2F;
+  --input: #1C3E2F;
+  --ring: #16A34A;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), "Plus Jakarta Sans", sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Islamic Geometric & Batik SVG Pattern Backgrounds */
+.bg-islamic-pattern {
+  background-image: radial-gradient(circle at center, rgba(15, 92, 58, 0.04) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230F5C3A' fill-opacity='0.04' fill-rule='evenodd'%3E%3Cpath d='M30 30L15 15H0v15l15 15-15 15v15h15l15-15 15 15h15V45L45 30l15-15V0H45L30 15 15 0H0v15l15 15zm0 0l15 15 15-15-15-15-15 15z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.dark .bg-islamic-pattern {
+  background-image: radial-gradient(circle at center, rgba(201, 162, 75, 0.05) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A24B' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M30 30L15 15H0v15l15 15-15 15v15h15l15-15 15 15h15V45L45 30l15-15V0H45L30 15 15 0H0v15l15 15zm0 0l15 15 15-15-15-15-15 15z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.bg-batik-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A24B' fill-opacity='0.04' fill-rule='evenodd'%3E%3Cpath d='M20 20L0 0h20l20 20-20 20H0l20-20zM0 40h20L0 20v20zm40 0V20L20 40h20zM0 0v20L20 0H0zm40 0H20l20 20V0z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Primary Active Button: Gradasi Hijau rounded-full */
+.btn-primary-madrasah {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #0F5C3A 0%, #16A34A 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.625rem 1.5rem;
+  box-shadow: 0 4px 14px 0 rgba(15, 92, 58, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary-madrasah:hover {
+  background: linear-gradient(135deg, #0c4a2e 0%, #13893e 100%);
+  box-shadow: 0 8px 22px 0 rgba(15, 92, 58, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-primary-madrasah:active {
+  transform: translateY(0);
+}
+
+/* Card Styling: rounded-2xl, border tipis hijau muda, shadow halus, hover translate-y + shadow kuat */
+.card-madrasah {
+  border-radius: 1rem;
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid rgba(15, 92, 58, 0.12);
+  box-shadow: 0 4px 20px -2px rgba(15, 92, 58, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-madrasah:hover {
+  transform: translateY(-4px);
+  border-color: rgba(22, 163, 74, 0.35);
+  box-shadow: 0 16px 32px -4px rgba(15, 92, 58, 0.16);
+}
+
+.dark .card-madrasah {
+  border-color: rgba(22, 163, 74, 0.2);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+}
+
+.dark .card-madrasah:hover {
+  border-color: rgba(22, 163, 74, 0.45);
+  box-shadow: 0 16px 32px -4px rgba(0, 0, 0, 0.65);
+}
+
+/* Decorative Gold Accents */
+.gold-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #C9A24B 50%, transparent 100%);
+}
+
+.gold-badge {
+  background-color: rgba(201, 162, 75, 0.12);
+  color: #C9A24B;
+  border: 1px solid rgba(201, 162, 75, 0.3);
+}
+
+/* Section styling */
+.section-madrasah {
+  background-color: #F8FAF9;
+}
+
+.dark .section-madrasah {
+  background-color: #0c1f15;
 }

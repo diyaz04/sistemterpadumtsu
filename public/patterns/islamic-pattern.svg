@@ -1,0 +1,26 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="islamic-star" width="80" height="80" patternUnits="userSpaceOnUse">
+      <!-- 8-point geometric star and octagonal interlacing pattern -->
+      <g stroke="#0F5C3A" stroke-width="1" fill="none" opacity="0.08">
+        <!-- Center Star -->
+        <polygon points="40,20 45,35 60,40 45,45 40,60 35,45 20,40 35,35" />
+        <polygon points="40,25.86 54.14,40 40,54.14 25.86,40" />
+        <!-- Corner Star Fragments -->
+        <polygon points="0,0 15,5 20,20 5,15" />
+        <polygon points="80,0 65,5 60,20 75,15" />
+        <polygon points="0,80 15,75 20,60 5,65" />
+        <polygon points="80,80 65,75 60,60 75,65" />
+        <!-- Edge Bridges -->
+        <line x1="40" y1="0" x2="40" y2="20" />
+        <line x1="40" y1="60" x2="40" y2="80" />
+        <line x1="0" y1="40" x2="20" y2="40" />
+        <line x1="60" y1="40" x2="80" y2="40" />
+        <!-- Interlacing squares -->
+        <rect x="26" y="26" width="28" height="28" />
+        <rect x="26" y="26" width="28" height="28" transform="rotate(45 40 40)" />
+      </g>
+    </pattern>
+  </defs>
+  <rect width="80" height="80" fill="url(#islamic-star)" />
+</svg>
